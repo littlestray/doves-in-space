@@ -16,7 +16,7 @@ function init(fps) {
     eventCheckInterval = setInterval(() => {
         
         Math.random() > 0.66 ? creator.addDove() : null
-    }, 666)
+    }, 333)
     
     
 
