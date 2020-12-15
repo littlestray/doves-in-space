@@ -1,3 +1,5 @@
+//By: little_stray AKA Chris Baldys
+//github: https://github.com/littlestray/doves-in-space
 let path = window.location + window.path
 let clock, editor
 
