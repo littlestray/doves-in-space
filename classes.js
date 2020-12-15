@@ -18,8 +18,8 @@ class Creator {
         img.id  = "dove" + this.doveCount
         img.title = img.id
         img.src = "./assets/dove.gif"
-        img.style.top = (Math.random() * 100) + "%"
-        img.style.left = (Math.random() * 100) + "%"
+        img.style.top  = ((Math.random() * 120) - 10)  + "%"
+        img.style.left = ((Math.random() * 140) - 20)  + "%"
         img.style.transform = `rotate(${Math.random() * 360}deg)`
         this.sky.append(img)
 
