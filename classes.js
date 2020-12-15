@@ -1,5 +1,8 @@
-//By: little_stray AKA Chris Baldys
-//github: https://github.com/littlestray/doves-in-space
+//By: little_stray
+//https://github.com/littlestray/doves-in-space
+//https://twitter.com/little_stray
+//Dec. 15 2020
+
 class Creator {
 
     
