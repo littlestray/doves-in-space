@@ -1,22 +1,21 @@
 let path = window.location + window.path
 let clock, editor
 
-let eventCheckInterval;
-
-let creator = new Creator(document.getElementById("sky"));
+let eventCheckInterval, creator;
 
 console.log(path)
 
 
-function init() {
-
+function init(fps) {
+    creator = new Creator(document.getElementById("sky"));
     eventCheckInterval = setInterval(() => {
         
-    }, 2000)
-
+        Math.random() > 0.66 ? creator.addDove() : null
+    }, 666)
+    
     
 
-    return window.requestAnimationFrame(gameLoop)
+    // return window.requestAnimationFrame(gameLoop)
 }
 
 function update() {
@@ -30,6 +29,7 @@ function draw() {
 
 
 function gameLoop() {
+
     update()
     draw()
     window.requestAnimationFrame(gameLoop)

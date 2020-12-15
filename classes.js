@@ -9,11 +9,13 @@ class Creator {
 
     addDove(){
         this.doveCount++
-        let img      = document.createElement("img")
+        let img      = new Image()
         img.id  = "dove" + this.doveCount
+        img.title = img.id
         img.src = "./assets/dove.gif"
-        // img.x   = Math.random() * window.innerWidth
-        // img.y   = Math.random() * window.innerHeight
+        img.style.top = (Math.random() * 100) + "%"
+        img.style.left = (Math.random() * 100) + "%"
+        img.style.transform = `rotate(${Math.random() * 360}deg)`
         this.sky.append(img)
 
     }
