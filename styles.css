@@ -38,6 +38,7 @@ body {
 
 img {
     position: fixed;
+    transition: transform 4s ease-in-out;
 }
 
 

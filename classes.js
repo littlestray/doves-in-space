@@ -14,7 +14,6 @@ class Creator {
 
     addDove(){
         this.doveCount++
-        console.log(`dove: ${this.doveCount}`)
         let img      = new Image()
         img.id  = "dove" + this.doveCount
         img.title = img.id
@@ -24,5 +23,9 @@ class Creator {
         img.style.transform = `rotate(${Math.random() * 360}deg)`
         this.sky.append(img)
 
+    }
+
+    get getDoveCount(){
+        return this.doveCount
     }
 }

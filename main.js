@@ -4,56 +4,102 @@
 //Dec. 15 2020
 
 let path = window.location + window.path
-let clock, editor
+console.log(path)
 
+// objects
 let eventCheckInterval, creator;
 
-console.log(path)
-let doveSpeed = 666
-avgWindowSize = 100
+// booleans
+let makeDoves = true;
+let spinDoves = false
 
+//counters
+let spinDovesCounter = 0;
+
+//dove creation attempt interval in ms
+let doveSpeed = 666
+
+//PERFORMANCE BENCHMARK
 let counter = 0
 let start = Date.now()
-let then  = start
+let then = start
+let avgWindowSize = 100
 let avgWindow = []
 
-for(let i = 0; i < avgWindowSize; i++){
+for (let i = 0; i < avgWindowSize; i++) {
     avgWindow.push(1)
 }
 console.log(`windowsize: ${avgWindow.length}`)
 
+//SCRIPT EXECUTION
 function init(fps) {
+
     creator = new Creator(document.getElementById("sky"));
+
     eventCheckInterval = setInterval(() => {
-        let now = Date.now()
+
         counter++
+
+        //Calc Average
+        let now = Date.now()
         avgWindow[counter % avgWindowSize] = doveSpeed / (now - then)
+        let avg = avgWindow.reduce((a, b) => a + b) / avgWindow.length
+        
+        // Phase 1
+        if (makeDoves) {
+            // console.log(`average: ${avg}`)
+            Math.random() > 0.66 ? creator.addDove() : null
+        }
 
-        // console.log(`current: ${doveSpeed / (Date.now() - then)}`);
-        let avg =  avgWindow.reduce((a,b) => a + b) / avgWindow.length
-        console.log(`average: ${avg}`)
+        // Phase 2
 
-        Math.random() > 0.66 ? creator.addDove() : null
-        then = now
+        if(spinDoves){
+            spinDovesCounter == 0 ? console.log('spinDoves') : null
+            if(spinDovesCounter < document.images.length){
+                let i = spinDovesCounter
+                let tilt = document.images[i].style.top.slice(0,document.images[i].style.top.length - 1)
+                tilt = parseFloat(tilt)
 
-        if(avg > 2) {
+                let tiltMag = document.images[i].style.left.slice(0,document.images[i].style.top.length - 1)
+                tiltMag = parseFloat(tilt) / 100
+                tiltMag = tiltMag * tiltMag * tiltMag * tiltMag
 
-            for(let i = document.images.length; i > 0; i--){
+                console.log(tiltMag)
+
+                document.images[i].style.transform = 
+                `rotate(${
+                    tilt * (tiltMag)
+                }deg)`
+                spinDovesCounter++
+            } else {
+                console.log(`Completion at: ${(now - start) / 1000 / 60}`)
                 clearInterval(eventCheckInterval)
-                document.images[i - 1].remove()
-                
             }
 
-            console.log(`Threshold at ${(now - start)/1000/60}`)
-            console.log(`last ten cycles: ${avgWindow}`)
-            console.log(`windowsize: ${avgWindow.length}`)
         }
         
-    
-    
+        if (( avg > 2 || creator.getDoveCount > 999 || now - start > 1320000) && !spinDoves) {
+            // clearInterval(eventCheckInterval)
+            makeDoves = false
+            spinDoves = true
+
+
+            for (let i = document.images.length; i > 0; i--) {
+                //document.images[i - 1].remove()
+            }
+
+            console.log(`Threshold at ${(now - start) / 1000 / 60}`)
+            console.log(`average: ${avg}`)
+            //console.log(`last avgWindow: ${avgWindow}`)
+            console.log(`windowsize: ${avgWindow.length}`)
+            console.log(`total doves in space: ${creator.getDoveCount}`)
+        }
+
+        then = now
+
     }, doveSpeed)
-    
-    
+
+
 
     // return window.requestAnimationFrame(gameLoop)
 }
