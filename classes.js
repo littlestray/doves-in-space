@@ -14,6 +14,7 @@ class Creator {
 
     addDove(){
         this.doveCount++
+        console.log(`dove: ${this.doveCount}`)
         let img      = new Image()
         img.id  = "dove" + this.doveCount
         img.title = img.id
